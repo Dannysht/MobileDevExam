@@ -1,7 +1,9 @@
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text, View, Image, StyleSheet } from 'react-native'
 
 const ShoeDisplay = (props) =>
 {
+    const imageName = props.image.split("/")
     const styles = StyleSheet.create({
         container: {
           height: 240,
@@ -44,9 +46,11 @@ const ShoeDisplay = (props) =>
         }
     });
 
+    const image = require('../public/images/' + imageName[imageName.length - 1])
+
     return(
         <View style={styles.container}>
-            <Image style={styles.image} source={props.image}/>
+            <Image style={styles.image} source={image}/>
             <Text style={styles.brand} id="brand">{props.brand}</Text>
             <Text style={styles.name} id="display-title">{props.name}</Text>
             <Text style={styles.price} id="price">€{props.price}</Text> 

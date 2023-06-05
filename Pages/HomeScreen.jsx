@@ -1,16 +1,36 @@
+import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, FlatList, } from 'react-native';
 import ShoeDisplay from '../Components/ShoeDisplay';
 
-const image = require("../assets/image.png")
-
+//const image = require("../assets/image.png")
 const HomeScreen = ({navigation}) =>
 {
+
+  const [shoes, setShoes] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+    const fetchData = async () =>
+    {
+        const receivedShoes = await fetch(`http://192.168.8.103:8080/shoes`)
+        const receivedShoesJSON = await receivedShoes.json()
+        setShoes(receivedShoesJSON)
+        setIsLoading(false)
+    }
+
+    useEffect(() => {
+      fetchData();
+    });
+
     return(
-        <View style={styles.container}>
-            <ShoeDisplay brand = "Nike" name = "Air Force 1 Mid" price = "220" image = {image}/>
-            <StatusBar style="auto" />
-        </View>
+      <View style={styles.container}>
+        {isLoading ? (<ActivityIndicator/>) :
+        (<FlatList data={shoes} keyExtractor={({id}) => id} renderItem={({item}) =>(
+          <ShoeDisplay brand = {item.brand} name = {item.name} price = {item.price} image = {item.photoLocation}/>
+          )} />
+        )}
+        <StatusBar style="auto" /> 
+      </View>
+        
     )
 }
 
