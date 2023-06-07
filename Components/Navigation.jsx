@@ -47,19 +47,19 @@ const AppNavigator = () =>
             >
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
             {
-                return <Image source={require('../assets/home.svg')} style={{ width: size, height: size, tintColor: color }}/>
+                return <Image source={require('../assets/home.png')} style={{ width: size, height: size, tintColor: color }}/>
             }}} name="Home" component={HomeScreen} />
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
             {
-                return <Image source={require('../assets/auction.svg')} style={{ width: size, height: size, tintColor: color }}/>
+                return <Image source={require('../assets/auction.png')} style={{ width: size, height: size, tintColor: color }}/>
             }}}  name="Auctions" component={AuctionScreen} />
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
             {
-                return <Image source={require('../assets/contact-us.svg')} style={{ width: size, height: size, tintColor: color }}/>
+                return <Image source={require('../assets/contact-us.png')} style={{ width: size, height: size, tintColor: color }}/>
             }}}  name="Contact us" component={ContactUs} />
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
             {
-                return <Image source={require('../assets/profile.svg')} style={{ width: size, height: size, tintColor: color }}/>
+                return <Image source={require('../assets/profile.png')} style={{ width: size, height: size, tintColor: color }}/>
             }}}  name="Account" component={Profile} />
             </Tab.Navigator>
         </NavigationContainer>

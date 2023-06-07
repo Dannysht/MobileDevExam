@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { Text, View, Image, StyleSheet } from 'react-native';
 
-const ShoeDisplay = (props) =>
-{
-    const imageName = props.image.split("/")
+const ShoeDisplay = (props) => {
+    const allImages = {
+        "1685958934718.png": require('../public/images/1685958934718.png'),
+        "1685958934714.jpeg": require('../public/images/1685958934714.jpeg'),
+        "1685958934716.png": require('../public/images/1685958934716.png'),
+    };
+
+    const imageName = props.image.split("/");
     const styles = StyleSheet.create({
         container: {
           height: 240,
@@ -46,17 +51,24 @@ const ShoeDisplay = (props) =>
         }
     });
 
-    const image = require('../public/images/' + imageName[imageName.length - 1])
+    const [image, setImage] = useState(null);
 
-    return(
+    useEffect(() => {
+        const found = allImages[imageName[imageName.length - 1]];
+        if (found) {
+            setImage(found);
+        }
+    }, []);
+
+    return (
         <View style={styles.container}>
-            <Image style={styles.image} source={image}/>
+            <Image style={styles.image} source={image} />
             <Text style={styles.brand} id="brand">{props.brand}</Text>
             <Text style={styles.name} id="display-title">{props.name}</Text>
-            <Text style={styles.price} id="price">€{props.price}</Text> 
+            <Text style={styles.price} id="price">€{props.price}</Text>
         </View>
-    )
-    
-}
+    );
+};
 
-export default ShoeDisplay
+export default ShoeDisplay;
+
