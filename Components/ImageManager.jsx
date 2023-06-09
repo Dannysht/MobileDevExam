@@ -22,7 +22,7 @@ const ImageManager = () => {
 
     return (
         <View>
-            Render the form to add a new image
+            {/* Render the form to add a new image */}
             <AddImage addNewImage={addNewImage} />
             <ShoeDisplay images={images} />
             {Object.entries(images).map(([imageName, imageSource]) => (

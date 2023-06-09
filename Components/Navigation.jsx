@@ -16,6 +16,7 @@ const Navigation = () =>
 {
     return(
         <NavigationContainer>
+<<<<<<< HEAD
                <Stack.Navigator screenOptions={{
                     tabBarStyle: {
                     backgroundColor: '#2f3e46',
@@ -28,6 +29,10 @@ const Navigation = () =>
                 headerTintColor: '#cce3de'
             }}>
                 <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true}/>
+=======
+               <Stack.Navigator>
+                <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true} />
+>>>>>>> ecdd5dcadba027da2093bb6dccc28744cc9c3828
                 <Stack.Screen name="Shoe" component={Shoe} />
             </Stack.Navigator>
         </NavigationContainer>

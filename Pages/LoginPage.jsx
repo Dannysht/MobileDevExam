@@ -1,7 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import toastr from 'toastr';
-//import 'toastr/build/toastr.min.css';
 import { UserContext } from '../Components/UserContext';
 
 const LoginScreen = () => {

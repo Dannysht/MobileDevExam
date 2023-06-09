@@ -17,10 +17,15 @@ const Shoe = (props) => {
 
     const fetchShoe = async () =>
     {
-        const response = await fetch(`http://192.168.8.106:8080/shoes/${url}`, {
+      const response = await fetch(`http://192.168.68.101:8080/shoes/${url}`, {
         method: "GET",
         credentials: "include",
-        })
+      })
+
+      // const response = await fetch(`http://192.168.8.106:8080/shoes/${url}`, {
+      // method: "GET",
+      // credentials: "include",
+      // })
       const data = await response.json()
         setShoe(data.shoe)
         setPhotos(data.photos)
