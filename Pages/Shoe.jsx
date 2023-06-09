@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Image, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { ScrollView, View, Image, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { UserContext } from '../Components/UserContext';
 
@@ -22,7 +22,6 @@ const Shoe = (props) => {
         credentials: "include",
         })
       const data = await response.json()
-      console.log(data);
         setShoe(data.shoe)
         setPhotos(data.photos)
         setSizes(data.sizes)
@@ -60,7 +59,7 @@ const Shoe = (props) => {
     }
 
     return (
-        <View>
+        <ScrollView style={styles.container}>
         {photos.length === 0 ? (
             <Text>Loading photos...</Text>
         ) : (
@@ -133,11 +132,15 @@ const Shoe = (props) => {
             <Text>Model number: {shoe.model}</Text>
             <Text>Colorway: {shoe.colorway}</Text>
         </View>
-        </View>
+        </ScrollView>
     );
     }
 
     const styles = {
+        container:
+        {
+            backgroundColor: '#f6fff8'
+        },
         imageContainer: {
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -177,7 +180,7 @@ const Shoe = (props) => {
           buttonWrapper: {
             justifyContent: 'center',
             alignItems: 'flex-end',
-            marginTop: -25,
+            marginTop: 15,
             marginRight: 20,
           },
           button: {

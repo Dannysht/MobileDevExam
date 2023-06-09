@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import toastr from 'toastr';
-import 'toastr/build/toastr.min.css';
+//import 'toastr/build/toastr.min.css';
 import { UserContext } from '../Components/UserContext';
 
 const LoginScreen = () => {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   form: {
     backgroundColor: 'white',
     minWidth: 320,
-    minHeight: '40vh',
+    minHeight: 40,
     padding: 16,
     shadowColor: '#000',
     shadowOffset: {
