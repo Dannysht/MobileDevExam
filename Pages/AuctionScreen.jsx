@@ -11,7 +11,7 @@ const HomeScreen = ({navigation}) =>
   const [isLoading, setIsLoading] = useState(true)
     const fetchData = async () =>
     {
-        const receivedShoes = await fetch(`http://192.168.8.103:8080/shoes`)
+      const receivedShoes = await fetch(`http://192.168.68.101:8080/auctions`)
         const receivedShoesJSON = await receivedShoes.json()
         setShoes(receivedShoesJSON)
         setIsLoading(false)
