@@ -8,6 +8,9 @@ const ShoeDisplay = (props) => {
         "1685958934716.png": require('../public/images/1685958934716.png'),
     };
 
+
+
+
     const imageName = props.image.split("/");
     const styles = StyleSheet.create({
         container: {
@@ -25,20 +28,20 @@ const ShoeDisplay = (props) => {
         },
         brand:
         {
-            fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
+            //fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
             fontWeight: 'bold',
             color: '#cce3de',
             marginBottom: 10,
         },
         name:
         {
-            fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
+            //fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
             color: '#cce3de',
             marginBottom: 10,
         },
         price:
         {
-            fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
+           // fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
             color: '#cce3de',
             fontSize: 12,
         },

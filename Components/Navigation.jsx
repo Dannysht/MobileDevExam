@@ -17,7 +17,7 @@ const Navigation = () =>
     return(
         <NavigationContainer>
                <Stack.Navigator>
-                <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true}/>
+                <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true} />
                 <Stack.Screen name="Shoe" component={Shoe} />
             </Stack.Navigator>
         </NavigationContainer>
