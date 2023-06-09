@@ -1,9 +1,12 @@
-import AppNavigator from './Components/Navigation';
+import Navigation from './Components/Navigation';
+import { UserProvider } from './Components/UserContext';
 
 export default function App() {
 
   return (
-    <AppNavigator/>
+    <UserProvider>
+      <Navigation/>
+    </UserProvider>
   );
 }
 

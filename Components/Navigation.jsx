@@ -6,26 +6,27 @@ import HomeScreen from '../Pages/HomeScreen';
 import AuctionScreen from '../Pages/AuctionScreen';
 import ContactUs from '../Pages/ContactUs';
 import Profile from '../Pages/Profile';
+import Shoe from '../Pages/Shoe';
+import LoginScreen from '../Pages/LoginPage';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const Navigation = () =>
 {
-    /*return(
+    return(
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Auctions" component={AuctionScreen} />
+               <Stack.Navigator>
+                <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true}/>
+                <Stack.Screen name="Shoe" component={Shoe} />
             </Stack.Navigator>
         </NavigationContainer>
-    )*/
+    )
 }
 
 const AppNavigator = () =>
 {
     return(
-        <NavigationContainer>
             <Tab.Navigator
 
                 screenOptions={{
@@ -60,11 +61,10 @@ const AppNavigator = () =>
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
             {
                 return <Image source={require('../assets/profile.png')} style={{ width: size, height: size, tintColor: color }}/>
-            }}}  name="Account" component={Profile} />
+            }}}  name="Account" component={LoginScreen} />
             </Tab.Navigator>
-        </NavigationContainer>
     )
     
 }
 
-export default AppNavigator
+export default Navigation
