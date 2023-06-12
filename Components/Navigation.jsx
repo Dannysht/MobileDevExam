@@ -8,6 +8,7 @@ import ContactUs from '../Pages/ContactUs';
 import Profile from '../Pages/Profile';
 import Shoe from '../Pages/Shoe';
 import LoginScreen from '../Pages/LoginPage';
+import Register from '../Pages/Register'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -16,11 +17,9 @@ const Navigation = () =>
 {
     return(
         <NavigationContainer>
-<<<<<<< HEAD
                <Stack.Navigator screenOptions={{
                     tabBarStyle: {
-                    backgroundColor: '#2f3e46',
-                     // Set your desired background color here
+                       backgroundColor: '#2f3e46',
                 },
                 headerStyle:
                 {
@@ -28,12 +27,10 @@ const Navigation = () =>
                 },
                 headerTintColor: '#cce3de'
             }}>
-                <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true}/>
-=======
-               <Stack.Navigator>
                 <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true} />
->>>>>>> ecdd5dcadba027da2093bb6dccc28744cc9c3828
                 <Stack.Screen name="Shoe" component={Shoe} />
+                <Stack.Screen name="Register" component={Register} />
+                <Stack.Screen name="Login" component={LoginScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
@@ -46,8 +43,7 @@ const AppNavigator = () =>
 
                 screenOptions={{
                     tabBarStyle: {
-                    backgroundColor: '#2f3e46',
-                     // Set your desired background color here
+                        backgroundColor: '#2f3e46',
                 },
                 headerStyle:
                 {

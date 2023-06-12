@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { UserContext } from '../Components/UserContext';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -57,7 +57,7 @@ const LoginScreen = () => {
           <Text style={styles.redirect}>Forgot Password?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}> 
           <Text style={styles.redirect}>Don't have an account? Sign up</Text>
         </TouchableOpacity>
       </View>

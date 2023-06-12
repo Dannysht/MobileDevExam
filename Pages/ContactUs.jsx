@@ -9,7 +9,7 @@ const ContactUs = () => {
    const [text, setText] = useState('');
 
    const sendEmail = () => {
-      fetch('http://http://192.168.68.101:8080/contact', {
+      fetch('http://192.168.68.101:8080/contact', {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
@@ -22,23 +22,14 @@ const ContactUs = () => {
       })
          .then(response => {
             if (response.status === 200) {
-               const from =
-                  (location.state && location.state.from) ||
-                  navigation.goBack();
-
-               Toast.show({
-                  type: 'success',
-                  text1: 'Mail sent successfully',
-                  position: 'top',
-                  visibilityTime: 1500,
-                  autoHide: true,
-               });
-               navigation.navigate(from, { replace: true });
+               navigation.goBack();
             }
          })
          .catch(error => {
             console.error(error);
          });
+
+
    };
 
    return (
