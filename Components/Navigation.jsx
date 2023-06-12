@@ -9,6 +9,7 @@ import Profile from '../Pages/Profile';
 import Shoe from '../Pages/Shoe';
 import LoginScreen from '../Pages/LoginPage';
 import Register from '../Pages/Register'
+import ForgotPassword from '../Pages/ForgotPassword';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,6 +32,7 @@ const Navigation = () =>
                 <Stack.Screen name="Shoe" component={Shoe} />
                 <Stack.Screen name="Register" component={Register} />
                 <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -11,8 +11,32 @@ const SignupScreen = ({ navigation }) => {
     const [address, setAddress] = useState('');
 
     const signup = () => {
-        // Perform signup logic here
-    };
+        const userData = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            address: address
+        };
+
+        fetch('http://192.168.68.101:8080/auth/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    navigation.navigate('Home');
+                } else if (response.status === 400) {
+                    alert("User already exists");
+                } else if (response.status === 403) {
+                    alert("Form not completed");
+                }
+            })
+    }
 
     return (
         <View style={styles.container}>
