@@ -5,7 +5,7 @@ const ForgotPassword = ({ navigation }) => {
     const [email, setEmail] = useState('');
 
     const forgotPass = () => {
-        fetch('http://192.168.68.101:8080/forgotPass', {
+        fetch('http://192.168.8.106:8080/forgotPass', {
             method: 'POST',
             credentials: 'include',
             headers: {

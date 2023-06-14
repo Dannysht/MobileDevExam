@@ -10,31 +10,60 @@ import Shoe from '../Pages/Shoe';
 import LoginScreen from '../Pages/LoginPage';
 import Register from '../Pages/Register'
 import ForgotPassword from '../Pages/ForgotPassword';
+import { UserContext } from './UserContext';
+import { useContext } from 'react';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const AuthNavigator = () => {
+    return (
+      <Stack.Navigator screenOptions={{
+                tabBarStyle: {
+                backgroundColor: '#2f3e46',
+            },
+            headerStyle:
+            {
+                backgroundColor: "#2f3e46",
+            },
+            headerTintColor: '#cce3de'
+        }}>
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      </Stack.Navigator>
+    );
+  };
+
 const Navigation = () =>
 {
+    const { user } = useContext(UserContext);
     return(
         <NavigationContainer>
-               <Stack.Navigator screenOptions={{
-                    tabBarStyle: {
-                       backgroundColor: '#2f3e46',
-                },
-                headerStyle:
-                {
-                    backgroundColor: "#2f3e46",
-                },
-                headerTintColor: '#cce3de'
-            }}>
-                <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true} />
-                <Stack.Screen name="Shoe" component={Shoe} />
-                <Stack.Screen name="Register" component={Register} />
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
-            </Stack.Navigator>
+            {user ? <StackNavigation/> : <AuthNavigator/>}
         </NavigationContainer>
+    )
+}
+
+const StackNavigation = () =>
+{
+    return(
+        <Stack.Navigator screenOptions={{
+                tabBarStyle: {
+                backgroundColor: '#2f3e46',
+            },
+            headerStyle:
+            {
+                backgroundColor: "#2f3e46",
+            },
+            headerTintColor: '#cce3de'
+        }}>
+            <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true} />
+            <Stack.Screen name="Shoe" component={Shoe} />
+            <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
+        </Stack.Navigator>
     )
 }
 

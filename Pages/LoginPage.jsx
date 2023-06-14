@@ -1,33 +1,35 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { UserContext } from '../Components/UserContext';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = ({ navigation }) => {
+  const navigate = useNavigation()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const {user, updateUser} = useContext(UserContext)
+  
 
   const login = () => {
-    // Perform login logic here
-    // Replace the fetch request with your actual API call
-
-    // Simulating a successful login response
-    if (username === 'admin' && password === 'password') {
-      // Redirect to a different screen based on role
-      // Replace 'AdminScreen' and 'UserScreen' with your actual screen components
-      if (role === 'admin') {
-        navigate('AdminScreen');
-      } else {
-        navigate('UserScreen');
-      }
-    } else {
-      toastr.error('Wrong credentials!', '', {
-        timeOut: 1500,
-        extendedTimeOut: 1000,
-        positionClass: 'toast-top-right',
-      });
+    
+    const userData = 
+    {
+      username: username,
+      password: password
     }
+    updateUser(userData)
+
+    fetch('http://192.168.8.106:8080/auth/login', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+  }).then(response => response.json()).then(data => {
+    updateUser({...userData, role: data.role})
+    navigate.navigate('Home');
+  })
   };
 
   return (
