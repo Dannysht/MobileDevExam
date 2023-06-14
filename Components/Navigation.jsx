@@ -10,6 +10,7 @@ import Shoe from '../Pages/Shoe';
 import LoginScreen from '../Pages/LoginPage';
 import Register from '../Pages/Register'
 import ForgotPassword from '../Pages/ForgotPassword';
+import AccountScreen from '../Pages/Account';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -74,7 +75,8 @@ const AppNavigator = () =>
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
             {
                 return <Image source={require('../assets/profile.png')} style={{ width: size, height: size, tintColor: color }}/>
-            }}}  name="Account" component={LoginScreen} />
+            }
+            }} name="Account" component={AccountScreen} />
             </Tab.Navigator>
     )
     
