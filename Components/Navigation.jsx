@@ -12,6 +12,7 @@ import Register from '../Pages/Register'
 import ForgotPassword from '../Pages/ForgotPassword';
 import { UserContext } from './UserContext';
 import { useContext } from 'react';
+import AccountScreen from '../Pages/Account';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -103,7 +104,8 @@ const AppNavigator = () =>
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
             {
                 return <Image source={require('../assets/profile.png')} style={{ width: size, height: size, tintColor: color }}/>
-            }}}  name="Account" component={LoginScreen} />
+            }
+            }} name="Account" component={AccountScreen} />
             </Tab.Navigator>
     )
     
