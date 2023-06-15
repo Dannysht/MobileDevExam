@@ -81,7 +81,7 @@ const Shoe = (props) => {
         body:JSON.stringify(
             {
                 username: username,
-                size: pickedSize
+                shoeID : shoeId
             }
         )
       })
