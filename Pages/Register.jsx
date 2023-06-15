@@ -20,7 +20,7 @@ const SignupScreen = ({ navigation }) => {
             address: address
         };
 
-        fetch('http://192.168.68.101:8080/auth/signup', {
+        fetch('http://192.168.8.106:8080/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

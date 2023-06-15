@@ -6,7 +6,7 @@ import { ImageContext } from '../Components/ImageManager';
 import { Picker } from '@react-native-picker/picker';
 
 const Shoe = (props) => {
-    const [pickedSize, setPickedSize] = useState("42.5");
+    const [pickedSize, setPickedSize] = useState("");
     const [photos, setPhotos] = useState([]);
     const [sizes, setSizes] = useState([{}]);
     const [shoe, setShoe] = useState({})
@@ -27,7 +27,7 @@ const Shoe = (props) => {
       //   credentials: "include",
       // })
 
-      const response = await fetch(`http://192.168.68.101:8080/shoes/${url}`, {
+      const response = await fetch(`http://192.168.8.106:8080/shoes/${url}`, {
       method: "GET",
       credentials: "include",
       })
@@ -72,7 +72,7 @@ const Shoe = (props) => {
 
     const orderShoe = () => {
         let username = user.username
-      const response = fetch(`http://192.168.68.101:8080/orders`, {
+      const response = fetch(`http://192.168.8.106:8080/orders`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -129,6 +129,7 @@ const Shoe = (props) => {
             </View>
             
             <View style={styles.sizesContainer}>
+            <Text>Pick size:</Text>
             {sizes.length === 0 ? (
                 <Text>Loading sizes...</Text>
             ) : (
@@ -137,8 +138,9 @@ const Shoe = (props) => {
                 selectedValue={pickedSize}
                 onValueChange={(itemValue) => setPickedSize(itemValue)}
                 style={styles.picker}
+                itemStyle={styles.pickerItem}
               >
-                <Picker.Item label="Select size" value={""} />
+                <Picker.Item label="Select size" value={""} style={styles.pickerItem}/>
                 {sizes.map((size) => (
                   <Picker.Item key={size.id} label={`EU ${size.size}`} value={size.id} />
                 ))}
@@ -199,9 +201,6 @@ const Shoe = (props) => {
             fontSize: 18,
             fontWeight: 'bold',
           },
-          sizesContainer: {
-            flex: 1,
-          },
           buttonWrapper: {
             flex: 1,
             justifyContent: 'center',
@@ -232,19 +231,24 @@ const Shoe = (props) => {
           pickerContainer: {
             marginTop: 20,
             borderWidth: 2,
-            backgroundColor: "#2f3e46",
-            borderColor: "#a4c3b2",
+            /*backgroundColor: "#2f3e46",
+            borderColor: "#a4c3b2",*/
             borderRadius: 8,
             overflow: 'hidden',
             marginBottom: 25,
             color: '#cce3de',
+            marginLeft: 8,
           },
           picker: {
-            height: 50,
-            width: '100%',
-            paddingHorizontal: 10,
+            marginTop: -50,
+            height: 150,
+            width: 150,
 
           },
+          pickerItem:
+          {
+            marginTop: -33
+          }
         };
 
     export default Shoe
