@@ -16,7 +16,7 @@ const ShoesTable = () => {
     }, []);
 
     const fetchShoes = async () => {
-        const response = await fetch("http://192.168.8.106:8080/shoes", {
+        const response = await fetch("http://192.168.68.101:8080/shoes", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -41,7 +41,7 @@ const ShoesTable = () => {
     };
 
     const updateShoe = async (id, brand, name, model, colorway, quantity, price) => {
-        await fetch(`http://192.168.8.106:8080/shoes/${id}`, {
+        await fetch(`http://192.168.68.101:8080/shoes/${id}`, {
             method: "PUT",
             credentials: "include",
             headers: {
@@ -59,7 +59,7 @@ const ShoesTable = () => {
     };
 
     const deleteShoe = async (id) => {
-        await fetch(`http://192.168.8.106:8080/shoes/${id}`, {
+        await fetch(`http://192.168.68.101:8080/shoes/${id}`, {
             method: "DELETE",
             credentials: "include",
             headers: {
