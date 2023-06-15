@@ -4,14 +4,14 @@ import { View, StyleSheet, ActivityIndicator, FlatList, } from 'react-native';
 import ShoeDisplay from '../Components/ShoeDisplay';
 
 //const image = require("../assets/image.png")
-const HomeScreen = ({navigation}) =>
+const AuctionScreen = ({ navigation }) =>
 {
 
   const [shoes, setShoes] = useState([])
   const [isLoading, setIsLoading] = useState(true)
     const fetchData = async () =>
     {
-      const receivedShoes = await fetch(`http://192.168.8.106:8080/auctions`)
+      const receivedShoes = await fetch(`http://192.168.68.101:8080/auctions`)
         const receivedShoesJSON = await receivedShoes.json()
         setShoes(receivedShoesJSON)
         setIsLoading(false)
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default HomeScreen
+export default AuctionScreen

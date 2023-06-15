@@ -27,7 +27,7 @@ const Shoe = (props) => {
       //   credentials: "include",
       // })
 
-      const response = await fetch(`http://192.168.8.106:8080/shoes/${url}`, {
+      const response = await fetch(`http://192.168.68.101:8080/shoes/${url}`, {
       method: "GET",
       credentials: "include",
       })
@@ -72,7 +72,7 @@ const Shoe = (props) => {
 
     const orderShoe = () => {
         let username = user.username
-        const response = fetch(`http://localhost:8080/orders`, {
+      const response = fetch(`http://192.168.68.101:8080/orders`, {
         method: "POST",
         credentials: "include",
         headers: {

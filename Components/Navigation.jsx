@@ -5,7 +5,6 @@ import { Image } from "react-native"
 import HomeScreen from '../Pages/HomeScreen';
 import AuctionScreen from '../Pages/AuctionScreen';
 import ContactUs from '../Pages/ContactUs';
-import Profile from '../Pages/Profile';
 import Shoe from '../Pages/Shoe';
 import LoginScreen from '../Pages/LoginPage';
 import Register from '../Pages/Register'
@@ -13,6 +12,10 @@ import ForgotPassword from '../Pages/ForgotPassword';
 import { UserContext } from './UserContext';
 import { useContext } from 'react';
 import AccountScreen from '../Pages/Account';
+import ShoesTable from '../Pages/Shoes';
+import AddShoe from '../Pages/AddShoe';
+import AuctionManagement from '../Pages/AuctionManagement';
+import createAuction from '../Pages/CreateAuction';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,9 +64,27 @@ const StackNavigation = () =>
         }}>
             <Stack.Screen name="Home" component={AppNavigator} options={{ headerShown: false }} independent={true} />
             <Stack.Screen name="Shoe" component={Shoe} />
-            <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
+        </Stack.Navigator>
+    )
+}
+
+const AccountNavigator = () => {
+    return (
+        <Stack.Navigator screenOptions={{
+            tabBarStyle: {
+                backgroundColor: '#2f3e46',
+            },
+            headerStyle:
+            {
+                backgroundColor: "#2f3e46",
+            },
+            headerTintColor: '#cce3de'
+        }}>
+            <Stack.Screen name='Account' component={AccountScreen} />
+            <Stack.Screen name='Account/Shoe' component={ShoesTable} />
+            <Stack.Screen name='Shoe/AddShoe' component={AddShoe} />
+            <Stack.Screen name='Account/AuctionManagement' component={AuctionManagement} />
+            <Stack.Screen name='AuctionManagement/CreateAuction' component={createAuction} />
         </Stack.Navigator>
     )
 }
@@ -89,7 +110,8 @@ const AppNavigator = () =>
                 }}
                 
             >
-                <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
+            <Tab.Screen options={{
+                tabBarIcon: ({ size, focused, color }) =>
             {
                 return <Image source={require('../assets/home.png')} style={{ width: size, height: size, tintColor: color }}/>
             }}} name="Home" component={HomeScreen} />
@@ -105,7 +127,8 @@ const AppNavigator = () =>
             {
                 return <Image source={require('../assets/profile.png')} style={{ width: size, height: size, tintColor: color }}/>
             }
-            }} name="Account" component={AccountScreen} />
+                , headerShown: false
+            }} name="Account" component={AccountNavigator} independent={true} />
             </Tab.Navigator>
     )
     
