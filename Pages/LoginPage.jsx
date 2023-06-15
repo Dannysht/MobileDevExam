@@ -20,7 +20,7 @@ const LoginScreen = ({ navigation }) => {
     }
     updateUser(userData)
 
-    fetch('http://192.168.8.106:8080/auth/login', {
+    fetch('http://192.168.68.101:8080/auth/login', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',

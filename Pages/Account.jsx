@@ -2,16 +2,21 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Image } from "react-native"
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../Components/UserContext';
+import { useContext } from 'react';
 
 const AccountScreen = () => {
+    const { user } = useContext(UserContext)
     const navigation = useNavigation();
 
+
+
     const handleShoesClick = () => {
-        navigation.navigate('Account/Shoes');
+        navigation.navigate('Account/Shoe');
     };
 
     const handleAuctionsClick = () => {
-        navigation.navigate('Account/Auctions');
+        navigation.navigate('Account/AuctionManagement');
     };
 
     const handleOrdersClick = () => {
@@ -20,14 +25,22 @@ const AccountScreen = () => {
 
     return (
         <View style={styles.container}>
+            {user.role === "admin" ?
+                <View>
             <TouchableOpacity style={styles.box} onPress={handleShoesClick}>
                 <Image source={require('../assets/sneakers.png')} style={{ width: 100, height: 100 }} />
                 <Text style={styles.text}>Shoes</Text>
             </TouchableOpacity>
+                </View> : <View />
+            }
+            {user.role === "admin" || user.role === "auctioneer" ?
+                <View>
             <TouchableOpacity style={styles.box} onPress={handleAuctionsClick}>
                 <Image source={require('../assets/auctionHammer.png')} style={{ width: 100, height: 100 }} />
                 <Text style={styles.text}>Auctions</Text>
-            </TouchableOpacity>
+                    </TouchableOpacity>
+                </ View> : <View />
+            }
             <TouchableOpacity style={styles.box} onPress={handleOrdersClick}>
                 <Image source={require('../assets/checklist.png')} style={{ width: 100, height: 100 }} />
                 <Text style={styles.text}>Orders</Text>
