@@ -6,7 +6,7 @@ import { ImageContext } from '../Components/ImageManager';
 import { Picker } from '@react-native-picker/picker';
 
 const Shoe = (props) => {
-    const [pickedSize, setPickedSize] = useState('');
+    const [pickedSize, setPickedSize] = useState("42.5");
     const [photos, setPhotos] = useState([]);
     const [sizes, setSizes] = useState([{}]);
     const [shoe, setShoe] = useState({})
@@ -81,7 +81,7 @@ const Shoe = (props) => {
         body:JSON.stringify(
             {
                 username: username,
-                shoeID : shoeId
+                shoeID : pickedSize
             }
         )
       })
@@ -138,7 +138,7 @@ const Shoe = (props) => {
                 onValueChange={(itemValue) => setPickedSize(itemValue)}
                 style={styles.picker}
               >
-                <Picker.Item label="Select size" value={null} />
+                <Picker.Item label="Select size" value={""} />
                 {sizes.map((size) => (
                   <Picker.Item key={size.id} label={`EU ${size.size}`} value={size.id} />
                 ))}
