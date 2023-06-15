@@ -18,7 +18,6 @@ const LoginScreen = ({ navigation }) => {
       username: username,
       password: password
     }
-    updateUser(userData)
 
     fetch('http://192.168.8.106:8080/auth/login', {
       method: 'POST',
@@ -26,10 +25,33 @@ const LoginScreen = ({ navigation }) => {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
-  }).then(response => response.json()).then(data => {
-    updateUser({...userData, role: data.role})
-    navigate.navigate('Home');
+  }).then(response => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      // Handle the error case based on the status code
+      if (response.status === 400) {
+        // Handle 400 Bad Request error
+        console.error('Bad Request');
+      } else {
+        // Handle other error cases
+        console.error('Request failed with status ' + response.status);
+      }
+      // Throw an error to trigger the .catch() block
+      throw new Error('Request failed');
+    }
   })
+  .then(data => {
+    updateUser({...userData, role: data.role});
+    /*if (data !== null) {
+      navigate.navigate('Home');
+    }*/
+  })
+  .catch(error => {
+    // Handle the error here
+    console.error(error);
+  });
+  
   };
 
   return (

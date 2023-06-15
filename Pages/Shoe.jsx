@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ScrollView, View, Image, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { ScrollView, View, Image, Text, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { UserContext } from '../Components/UserContext';
+import { ImageContext } from '../Components/ImageManager';
+import { Picker } from '@react-native-picker/picker';
 
 const Shoe = (props) => {
-    const [pickedSize, setPickedSize] = useState(null);
+    const [pickedSize, setPickedSize] = useState('');
     const [photos, setPhotos] = useState([]);
-    const [sizes, setSizes] = useState([]);
+    const [sizes, setSizes] = useState([{}]);
     const [shoe, setShoe] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const route = useRoute();
     const { shoeId, model } = route.params;
     const {user} = useContext(UserContext)
+    const { images } = useContext(ImageContext);
+    const [image, setImage] = useState(null);
+    const [secondaryImages, setSecondaryImages] = useState([]);
 
     const url = `${shoeId}?model=${model}`
 
@@ -30,10 +35,7 @@ const Shoe = (props) => {
         setShoe(data.shoe)
         setPhotos(data.photos)
         setSizes(data.sizes)
-        setIsLoading(false);
-      photos.forEach(photo => {
-            photo.photoLocation = photo.photoLocation.substring(16)
-        })
+        setIsLoading(false)
     }
 
 
@@ -41,6 +43,32 @@ const Shoe = (props) => {
     {
         fetchShoe()
     }, [])
+
+  useEffect(() => {
+    const matchedImages = [];
+    Object.keys(images).forEach((key) => {
+      for (let i = 0; i < photos.length; ++i) {
+        if(i === 0)
+        {
+          console.log(key === photos[i].photoLocation.substring(24));
+          if (key === photos[i].photoLocation.substring(24)) {
+            setImage(images[key])
+          }
+        }
+        else
+        {
+          if (key === photos[i].photoLocation.substring(24)) {
+            matchedImages.push(images[key]);
+          }
+        }  
+      }
+    });
+    
+    if (matchedImages.length > 0) {
+      setSecondaryImages((prevImages) => [...prevImages, ...matchedImages]);
+    }
+  }, [photos]);
+
 
     const orderShoe = () => {
         let username = user.username
@@ -69,32 +97,27 @@ const Shoe = (props) => {
             <Text>Loading photos...</Text>
         ) : (
             <View style={styles.imageContainer}>
-            {photos.map((photo, index) => (
-                <TouchableOpacity
-                key={index}
-                onPress={() => {
-                    [photos[0].photoLocation, photo.photoLocation] = [
-                    photo.photoLocation,
-                    photos[0].photoLocation,
-                    ];
-                    setPhotos([...photos]);
-                }}
-                >
-                {index === 0 ? (
-                    <Image
+              <Image
                     style={styles.mainPhoto}
-                    source={{ uri: photo.photoLocation }}
+                    source={image}
                     alt="main-photo"
-                    />
-                ) : (
-                    <Image
-                    style={styles.secondaryPhotos}
-                    source={{ uri: photo.photoLocation }}
-                    alt="secondary-photos"
-                    />
-                )}
-                </TouchableOpacity>
-            ))}
+              />
+            <FlatList
+        data={secondaryImages}
+        horizontal
+        contentContainerStyle={styles.secondaryImagesWrapper}
+        renderItem={({ item, index }) => (
+          <TouchableOpacity onPress={() => {
+            let updatedImage = image
+            const updatedImages = [...secondaryImages];
+            [updatedImage, updatedImages[index]] = [updatedImages[index], image];
+            setImage(updatedImage)
+            setSecondaryImages(updatedImages);}}>
+            <Image style={styles.secondaryPhotos} source={item} />
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
             </View>
         )}
         
@@ -109,20 +132,18 @@ const Shoe = (props) => {
             {sizes.length === 0 ? (
                 <Text>Loading sizes...</Text>
             ) : (
-                sizes.map((size) => (
-                <TouchableOpacity
-                    key={size.id}
-                    onPress={() => setPickedSize(size.id)}
-                    style={[
-                    styles.sizeButton,
-                    pickedSize === size.id && styles.selectedSizeButton,
-                    size.quantity === 0 && styles.unavailableSizeButton,
-                    ]}
-                    disabled={size.quantity === 0}
-                >
-                    <Text style={styles.sizeLabel}>EU {size.size}</Text>
-                </TouchableOpacity>
-                ))
+              <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={pickedSize}
+                onValueChange={(itemValue) => setPickedSize(itemValue)}
+                style={styles.picker}
+              >
+                <Picker.Item label="Select size" value={null} />
+                {sizes.map((size) => (
+                  <Picker.Item key={size.id} label={`EU ${size.size}`} value={size.id} />
+                ))}
+              </Picker>
+            </View>
             )}
             </View>
         </View>
@@ -144,24 +165,23 @@ const Shoe = (props) => {
     const styles = {
         container:
         {
-            backgroundColor: '#f6fff8'
+          flex: 1,
+          backgroundColor: '#f6fff8',
         },
         imageContainer: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'center',
           },
           mainPhoto: {
-            width: 512,
-            height: 512,
+            width: 256,
+            height: 256,
           },
           secondaryPhotos: {
-            width: 100,
-            height: 100,
+            width: 50,
+            height: 50,
           },
           infoSizeContainer: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'center',
           },
           infoContainer: {
@@ -183,10 +203,9 @@ const Shoe = (props) => {
             flex: 1,
           },
           buttonWrapper: {
+            flex: 1,
             justifyContent: 'center',
-            alignItems: 'flex-end',
-            marginTop: 15,
-            marginRight: 20,
+            alignItems: 'center',
           },
           button: {
             backgroundColor: '#cce3de',
@@ -200,10 +219,31 @@ const Shoe = (props) => {
             fontSize: 16,
           },
           description: {
-            position: 'absolute',
-            right: 0,
-            marginTop: '20%',
-            marginRight: '8%',
+            marginTop: 30,
+            justifyContent: 'center',
+            alignItems: 'center'
+          },
+          secondaryImagesWrapper:
+          {
+            flexDirection: 'row',
+            marginTop: 10,
+            justifyContent: 'center',
+          },
+          pickerContainer: {
+            marginTop: 20,
+            borderWidth: 2,
+            backgroundColor: "#2f3e46",
+            borderColor: "#a4c3b2",
+            borderRadius: 8,
+            overflow: 'hidden',
+            marginBottom: 25,
+            color: '#cce3de',
+          },
+          picker: {
+            height: 50,
+            width: '100%',
+            paddingHorizontal: 10,
+
           },
         };
 
