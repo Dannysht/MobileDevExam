@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
+import { ImageContext } from './ImageManager';
 
 const ShoeDisplay = (props) => {
-    const allImages = {
-        "1685958934718.png": require('../public/images/1685958934718.png'),
-        "1685958934714.jpeg": require('../public/images/1685958934714.jpeg'),
-        "1685958934716.png": require('../public/images/1685958934716.png'),
-    };
 
-
-
-
+    const { images } = useContext(ImageContext);
     const imageName = props.image.split("/");
     const styles = StyleSheet.create({
         container: {
@@ -57,7 +51,15 @@ const ShoeDisplay = (props) => {
     const [image, setImage] = useState(null);
 
     useEffect(() => {
-        const found = allImages[imageName[imageName.length - 1]];
+        let found = null
+        Object.keys(images).forEach((key) =>
+        {
+            if(key === imageName[imageName.length - 1])
+            {
+                found = images[key];
+            }
+        })
+        
         if (found) {
             setImage(found);
         }
