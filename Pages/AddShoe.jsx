@@ -12,7 +12,7 @@ const AddShoe = () => {
     const [quantity, setQuantity] = useState('');
     const [size, setSize] = useState('');
     const [price, setPrice] = useState('');
-    const [image, setImage] = useState(null);
+    const [file, setFile] = useState(null);
 
     const addShoe = () => {
         if (
@@ -35,7 +35,7 @@ const AddShoe = () => {
             formData.append('quantity', quantity);
             formData.append('size', size);
             formData.append('price', price);
-            formData.append('image', null);
+            formData.append('file', null);
 
 
             fetch("http://192.168.8.106:8080/shoes", {
