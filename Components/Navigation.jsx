@@ -16,6 +16,7 @@ import ShoesTable from '../Pages/Shoes';
 import AddShoe from '../Pages/AddShoe';
 import AuctionManagement from '../Pages/AuctionManagement';
 import createAuction from '../Pages/CreateAuction';
+import { TouchableOpacity } from 'react-native';
 import Orders from '../Pages/Orders';
 
 const Stack = createStackNavigator();
@@ -93,6 +94,12 @@ const AccountNavigator = () => {
 
 const AppNavigator = () =>
 {
+    const { user, updateUser } = useContext(UserContext);
+    const logout = () =>
+    {
+        updateUser(null)
+    }
+
     return(
             <Tab.Navigator
 
@@ -114,23 +121,29 @@ const AppNavigator = () =>
             >
             <Tab.Screen options={{
                 tabBarIcon: ({ size, focused, color }) =>
-            {
-                return <Image source={require('../assets/home.png')} style={{ width: size, height: size, tintColor: color }}/>
-            }}} name="Home" component={HomeScreen} />
+                {
+                    return <Image source={require('../assets/home.png')} style={{ width: size, height: size, tintColor: color }}/>
+                }}} name="Home" component={HomeScreen} />
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
-            {
-                return <Image source={require('../assets/auction.png')} style={{ width: size, height: size, tintColor: color }}/>
-            }}}  name="Auctions" component={AuctionScreen} />
+                {
+                    return <Image source={require('../assets/auction.png')} style={{ width: size, height: size, tintColor: color }}/>
+                }}}  name="Auctions" component={AuctionScreen} />
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
-            {
-                return <Image source={require('../assets/contact-us.png')} style={{ width: size, height: size, tintColor: color }}/>
-            }}}  name="Contact us" component={ContactUs} />
+                {
+                    return <Image source={require('../assets/contact-us.png')} style={{ width: size, height: size, tintColor: color }}/>
+                }}}  name="Contact us" component={ContactUs} />
                 <Tab.Screen options={{tabBarIcon: ({size, focused, color}) =>
-            {
-                return <Image source={require('../assets/profile.png')} style={{ width: size, height: size, tintColor: color }}/>
-            }
-                , headerShown: false
-            }} name="Account" component={AccountNavigator} independent={true} />
+                {
+                    return <Image source={require('../assets/profile.png')} style={{ width: size, height: size, tintColor: color }}/>
+                }
+                    , headerShown: false
+                }} name="Account" component={AccountNavigator} independent={true} />
+                <Tab.Screen component={HomeScreen} options={{tabBarButton: (props) => <TouchableOpacity {...props} onPress = {logout} />, tabBarIcon: ({size, focused, color}) =>
+                {
+                    return <Image source={require('../assets/logout.png')} style={{ width: size, height: size, tintColor: color }}/>
+                }
+                    , headerShown: false
+                }} name="Log Out" independent={true} />
             </Tab.Navigator>
     )
     
