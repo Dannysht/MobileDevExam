@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-
 
 const AddShoe = () => {
     const [brand, setBrand] = useState('');
@@ -22,8 +19,7 @@ const AddShoe = () => {
             !colorway ||
             !quantity ||
             !size ||
-            !price ||
-            !file
+            !price
         ) {
             alert('Missing information');
         } else {
@@ -35,14 +31,19 @@ const AddShoe = () => {
             formData.append('quantity', quantity);
             formData.append('size', size);
             formData.append('price', price);
-            formData.append('image', null);
+            //formData.append('image', null);
 
 
             fetch("http://192.168.68.101:8080/shoes", {
                 method: "POST",
                 credentials: "include",
                 body: formData
-            });
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+
             alert('Shoe created successfully');
             resetForm();
         }
