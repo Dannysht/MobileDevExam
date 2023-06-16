@@ -33,7 +33,7 @@ const CreateAuction = () => {
             formData.append('bid', price);
             formData.append('endDate', date);
 
-            fetch('http://192.168.8.106:8080/auctions', {
+            fetch('http://192.168.68.101:8080/auctions', {
                 method: 'POST',
                 body: formData,
             })

@@ -38,7 +38,7 @@ const AddShoe = () => {
             formData.append('file', null);
 
 
-            fetch("http://192.168.8.106:8080/shoes", {
+            fetch("http://192.168.68.101:8080/shoes", {
                 method: "POST",
                 credentials: "include",
                 body: formData

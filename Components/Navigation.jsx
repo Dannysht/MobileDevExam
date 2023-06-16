@@ -17,6 +17,7 @@ import AddShoe from '../Pages/AddShoe';
 import AuctionManagement from '../Pages/AuctionManagement';
 import createAuction from '../Pages/CreateAuction';
 import { TouchableOpacity } from 'react-native';
+import Orders from '../Pages/Orders';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -86,6 +87,7 @@ const AccountNavigator = () => {
             <Stack.Screen name='Shoe/AddShoe' component={AddShoe} />
             <Stack.Screen name='Account/AuctionManagement' component={AuctionManagement} />
             <Stack.Screen name='AuctionManagement/CreateAuction' component={createAuction} />
+            <Stack.Screen name="Account/Orders" component={Orders} />
         </Stack.Navigator>
     )
 }
