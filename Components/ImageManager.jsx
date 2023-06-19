@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 
 const ImageContext = createContext();
 
@@ -22,5 +22,6 @@ const ImageProvider = ({ children }) => {
     </ImageContext.Provider>
   );
 };
+const useImageContext = () => useContext(ImageContext) 
 
-export { ImageContext, ImageProvider };
+export { ImageContext, ImageProvider, useImageContext };

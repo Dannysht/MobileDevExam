@@ -9,7 +9,7 @@ function AuctionManagement() {
 
     const navigation = useNavigation();
     const handleCreateAuction = () => {
-        navigation.navigate('AuctionManagement/CreateAuction');
+        navigation.navigate('Create Auction');
     }
 
 
@@ -18,7 +18,7 @@ function AuctionManagement() {
 
 
     async function updateAuction(id, status) {
-        const response = await fetch(`http://192.168.68.101:8080/auctions/${id}?status=${status}`, {
+        const response = await fetch(`http://192.168.8.106:8080/auctions/${id}?status=${status}`, {
             method: 'PUT',
             credentials: 'include',
             headers: {
@@ -28,7 +28,7 @@ function AuctionManagement() {
     }
 
     async function deleteAuction(id) {
-        const response = await fetch(`http://192.168.68.101:8080/auctions/${id}`, {
+        const response = await fetch(`http://192.168.8.106:8080/auctions/${id}`, {
             method: 'DELETE',
             credentials: 'include',
             headers: {
@@ -44,14 +44,14 @@ function AuctionManagement() {
     async function loadAuctions() {
         if (user !== null) {
             if (user.role === 'admin') {
-                const response = await fetch('http://192.168.68.101:8080/admin/auctions', {
+                const response = await fetch('http://192.168.8.106:8080/admin/auctions', {
                     method: 'GET',
                     credentials: 'include',
                 });
                 const data = await response.json();
                 setAuctions(data);
             } else {
-                const response = await fetch(`http://192.168.8.101:8080/auctions/${user.username}`, {
+                const response = await fetch(`http://192.168.8.106:8080/auctions/${user.username}`, {
                     method: 'GET',
                     credentials: 'include',
                 });

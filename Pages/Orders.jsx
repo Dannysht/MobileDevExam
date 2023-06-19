@@ -10,7 +10,7 @@ const Orders = () => {
 
     const updateOrder = async (id, status) => {
         try {
-            const response = await fetch(`http://192.168.68.101:8080/orders/${id}`, {
+            const response = await fetch(`http://192.168.8.106:8080/orders/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,9 +29,9 @@ const Orders = () => {
             if (user !== null) {
                 let url = '';
                 if (user.role === 'admin') {
-                    url = 'http://192.168.68.101:8080/orders';
+                    url = 'http://192.168.8.106:8080/orders';
                 } else {
-                    url = `http://192.168.68.101:8080/orders/${user.username}`;
+                    url = `http://192.168.8.106:8080/orders/${user.username}`;
                 }
 
                 const response = await fetch(url, {

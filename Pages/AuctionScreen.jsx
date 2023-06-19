@@ -11,7 +11,7 @@ const AuctionScreen = ({ navigation }) =>
   const [isLoading, setIsLoading] = useState(true)
     const fetchData = async () =>
     {
-      const receivedShoes = await fetch(`http://192.168.68.101:8080/auctions`)
+      const receivedShoes = await fetch(`http://192.168.8.106:8080/auctions`)
         const receivedShoesJSON = await receivedShoes.json()
         setShoes(receivedShoesJSON)
         setIsLoading(false)

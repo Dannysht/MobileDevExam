@@ -83,11 +83,11 @@ const AccountNavigator = () => {
             headerTintColor: '#cce3de'
         }}>
             <Stack.Screen name='Account' component={AccountScreen} />
-            <Stack.Screen name='Account/Shoe' component={ShoesTable} />
-            <Stack.Screen name='Shoe/AddShoe' component={AddShoe} />
-            <Stack.Screen name='Account/AuctionManagement' component={AuctionManagement} />
-            <Stack.Screen name='AuctionManagement/CreateAuction' component={createAuction} />
-            <Stack.Screen name="Account/Orders" component={Orders} />
+            <Stack.Screen name='Shoes' component={ShoesTable} />
+            <Stack.Screen name='Add Shoes' component={AddShoe} />
+            <Stack.Screen name='Auction Management' component={AuctionManagement} />
+            <Stack.Screen name='Create Auction' component={createAuction} />
+            <Stack.Screen name="Orders" component={Orders} />
         </Stack.Navigator>
     )
 }

@@ -12,15 +12,15 @@ const AccountScreen = () => {
 
 
     const handleShoesClick = () => {
-        navigation.navigate('Account/Shoe');
+        navigation.navigate('Shoes');
     };
 
     const handleAuctionsClick = () => {
-        navigation.navigate('Account/AuctionManagement');
+        navigation.navigate('Auction Management');
     };
 
     const handleOrdersClick = () => {
-        navigation.navigate('Account/Orders');
+        navigation.navigate('Orders');
     };
 
     return (

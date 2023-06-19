@@ -9,7 +9,7 @@ const ContactUs = () => {
    const [text, setText] = useState('');
 
    const sendEmail = () => {
-      fetch('http://192.168.68.101:8080/contact', {
+      fetch('http://192.168.8.106:8080/contact', {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
