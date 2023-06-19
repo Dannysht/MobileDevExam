@@ -5,7 +5,6 @@ import * as ImagePicker from 'expo-image-picker';
 import { useImageContext } from '../Components/ImageManager';
 
 
-
 const AddShoe = () => {
     const { addNewImage } = useImageContext();
     const [brand, setBrand] = useState('');
@@ -43,7 +42,12 @@ const AddShoe = () => {
                 method: "POST",
                 credentials: "include",
                 body: formData
-            });
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+
             alert('Shoe created successfully');
             resetForm();
         }
