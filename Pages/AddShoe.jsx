@@ -37,6 +37,12 @@ const AddShoe = () => {
             formData.append('quantity', quantity);
             formData.append('size', size);
             formData.append('price', price);
+            files.forEach(file =>
+                {
+                    const blob = dataURItoBlob(file.uri, file.type)
+                    console.log(file);
+                    formData.append("file", blob)
+                })
 
             fetch("http://192.168.8.106:8080/shoes", {
                 method: "POST",
@@ -54,7 +60,15 @@ const AddShoe = () => {
     };
 
 
-    
+    const dataURItoBlob = (dataURI, fileType) => {
+        const byteString = atob(dataURI.split(',')[1]);
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: fileType });
+      };
 
     const resetForm = () => {
         setBrand('');
@@ -74,7 +88,7 @@ const AddShoe = () => {
                 quality: 0.8,
               });
           if (!result.cancelled) {
-            setFiles(result);
+            setFiles(result.assets || [result]);
             const assets = result.assets || [result];
 
       const filePromises = assets.map(asset => {
@@ -89,11 +103,8 @@ const AddShoe = () => {
       Promise.all(filePromises)
         .then(blobs => {
           blobs.forEach((blob, index) => {
-            const imageName = assets[index].uri.substring(200)
+            const imageName = path.basename(assets[index].uri);
             addNewImage(imageName, { uri: assets[index].uri });
-            // Append each blob to the formData
-            formData.append('file', blob, imageName);
-            console.log(formData.getAll("file"));
           });
         })
         .catch(error => console.error(error));
