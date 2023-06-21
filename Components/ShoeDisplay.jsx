@@ -8,7 +8,7 @@ const ShoeDisplay = (props) => {
     const imageName = props.image.split("/");
     const styles = StyleSheet.create({
         container: {
-          height: 240,
+          height: 260,
           width: 200,
           alignItems: 'center',
           justifyContent: 'center',
@@ -19,6 +19,7 @@ const ShoeDisplay = (props) => {
           borderColor: '#2f3e46',
           borderRadius: 12,
           backgroundColor: '#2f3e46',
+          marginTop: 10,
         },
         brand:
         {

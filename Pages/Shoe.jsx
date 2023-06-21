@@ -50,6 +50,7 @@ const Shoe = (props) => {
       for (let i = 0; i < photos.length; ++i) {
         if(i === 0)
         {
+          console.log(key);
           console.log(key === photos[i].photoLocation.substring(24));
           if (key === photos[i].photoLocation.substring(24)) {
             setImage(images[key])

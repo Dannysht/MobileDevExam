@@ -4,9 +4,12 @@ const ImageContext = createContext();
 
 const ImageProvider = ({ children }) => {
   const [images, setImages] = useState({
-    "3249749e-ec89-4a1c-b260-12a0a0a048c8.jpeg": require('../public/images/3249749e-ec89-4a1c-b260-12a0a0a048c8.jpeg'),
-    "95eb6a74-6cb7-42db-a703-a6ef94dee058.png": require('../public/images/95eb6a74-6cb7-42db-a703-a6ef94dee058.png'),
-    "44f7a961-6bcf-4cc2-aea8-f7bf289b96f0.png": require('../public/images/44f7a961-6bcf-4cc2-aea8-f7bf289b96f0.png'),
+    "b3f77c87-b332-4b06-87cb-876b059d04ef.jpeg.jpeg": require("../public/images/b3f77c87-b332-4b06-87cb-876b059d04ef.jpeg.jpeg"),
+    "098cf8f3-bbec-4215-afb0-b22e2be43acc.jpeg.jpeg": require("../public/images/098cf8f3-bbec-4215-afb0-b22e2be43acc.jpeg.jpeg"),
+    "e557639c-ff31-48ba-87bf-d219dd02da7a.jpeg.jpeg": require("../public/images/e557639c-ff31-48ba-87bf-d219dd02da7a.jpeg.jpeg"),
+    "d85f3fac-88cf-4d57-b894-a17f0df70acd.jpg.jpeg" : require("../public/images/d85f3fac-88cf-4d57-b894-a17f0df70acd.jpg.jpeg"),
+    "c0b46ad4-eb78-4caf-be93-92e3fe09efc2.jpg.jpeg": require("../public/images/c0b46ad4-eb78-4caf-be93-92e3fe09efc2.jpg.jpeg"),
+    "b65a59d4-3d0d-4cb5-b459-6047b3ea4dcf.jpeg.jpeg": require("../public/images/b65a59d4-3d0d-4cb5-b459-6047b3ea4dcf.jpeg.jpeg"),
   });
 
   const addNewImage = (imageName, imageSource) => {

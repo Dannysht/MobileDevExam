@@ -29,7 +29,7 @@ const SignupScreen = ({ navigation }) => {
         })
             .then(response => {
                 if (response.status === 200) {
-                    navigation.navigate('Home');
+                    navigation.navigate('Login');
                 } else if (response.status === 400) {
                     alert("User already exists");
                 } else if (response.status === 403) {
